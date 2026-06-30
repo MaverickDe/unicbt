@@ -1,0 +1,4 @@
+rm -rf build
+cmake -B build -DCMAKE_PREFIX_PATH=~/Qt/6.7.3/macos
+cmake --build build
+./build/CBTExam

@@ -1,0 +1,42 @@
+file(REMOVE_RECURSE
+  "CBTExam_autogen"
+  "CMakeFiles/CBTExam_autogen.dir/AutogenUsed.txt"
+  "CMakeFiles/CBTExam_autogen.dir/ParseCache.txt"
+  "CBTExam"
+  "CBTExam.pdb"
+  "CBTExam_autogen/mocs_compilation.cpp"
+  "CBTExam_autogen/timestamp"
+  "CMakeFiles/CBTExam.dir/CBTExam_autogen/mocs_compilation.cpp.o"
+  "CMakeFiles/CBTExam.dir/CBTExam_autogen/mocs_compilation.cpp.o.d"
+  "CMakeFiles/CBTExam.dir/src/lockdown/lockdownmanager.cpp.o"
+  "CMakeFiles/CBTExam.dir/src/lockdown/lockdownmanager.cpp.o.d"
+  "CMakeFiles/CBTExam.dir/src/main.cpp.o"
+  "CMakeFiles/CBTExam.dir/src/main.cpp.o.d"
+  "CMakeFiles/CBTExam.dir/src/mainwindow.cpp.o"
+  "CMakeFiles/CBTExam.dir/src/mainwindow.cpp.o.d"
+  "CMakeFiles/CBTExam.dir/src/models/examsession.cpp.o"
+  "CMakeFiles/CBTExam.dir/src/models/examsession.cpp.o.d"
+  "CMakeFiles/CBTExam.dir/src/network/apiclient.cpp.o"
+  "CMakeFiles/CBTExam.dir/src/network/apiclient.cpp.o.d"
+  "CMakeFiles/CBTExam.dir/src/pages/biopage.cpp.o"
+  "CMakeFiles/CBTExam.dir/src/pages/biopage.cpp.o.d"
+  "CMakeFiles/CBTExam.dir/src/pages/exampage.cpp.o"
+  "CMakeFiles/CBTExam.dir/src/pages/exampage.cpp.o.d"
+  "CMakeFiles/CBTExam.dir/src/pages/onboardpage.cpp.o"
+  "CMakeFiles/CBTExam.dir/src/pages/onboardpage.cpp.o.d"
+  "CMakeFiles/CBTExam.dir/src/pages/resultpage.cpp.o"
+  "CMakeFiles/CBTExam.dir/src/pages/resultpage.cpp.o.d"
+  "CMakeFiles/CBTExam.dir/src/widgets/notificationpopup.cpp.o"
+  "CMakeFiles/CBTExam.dir/src/widgets/notificationpopup.cpp.o.d"
+  "CMakeFiles/CBTExam.dir/src/widgets/questionwidget.cpp.o"
+  "CMakeFiles/CBTExam.dir/src/widgets/questionwidget.cpp.o.d"
+  "CMakeFiles/CBTExam.dir/src/widgets/supervisormodal.cpp.o"
+  "CMakeFiles/CBTExam.dir/src/widgets/supervisormodal.cpp.o.d"
+  "CMakeFiles/CBTExam.dir/src/widgets/timerwidget.cpp.o"
+  "CMakeFiles/CBTExam.dir/src/widgets/timerwidget.cpp.o.d"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/CBTExam.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

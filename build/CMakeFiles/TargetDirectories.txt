@@ -1,0 +1,5 @@
+/Users/apple/Desktop/codes/cbt_exam/build/CMakeFiles/CBTExam.dir
+/Users/apple/Desktop/codes/cbt_exam/build/CMakeFiles/edit_cache.dir
+/Users/apple/Desktop/codes/cbt_exam/build/CMakeFiles/rebuild_cache.dir
+/Users/apple/Desktop/codes/cbt_exam/build/CMakeFiles/CBTExam_autogen_timestamp_deps.dir
+/Users/apple/Desktop/codes/cbt_exam/build/CMakeFiles/CBTExam_autogen.dir
