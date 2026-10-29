@@ -82,6 +82,10 @@ cmake .. -DCMAKE_PREFIX_PATH="/opt/Qt/6.x.x/gcc_64"
 make -j$(nproc)
 ```
 
+
+
+or check our buildcmd.txt
+
 ---
 
 ## Running the Server

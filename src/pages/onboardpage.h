@@ -10,21 +10,22 @@ public:
     explicit OnboardPage(QWidget* parent = nullptr);
     void reset();
 
+public slots:
+    void onPingError(const QString& error);
+
 signals:
     void urlConfirmed(const QString& url);
-     void exitRequested();   // ← new
+    void exitRequested();
 
 private slots:
     void onProceedClicked();
-    void onExitClicked();   // ← new
 
 private:
-    QLineEdit*   m_urlInput;
-    QPushButton* m_proceedBtn;
-     QPushButton* m_exitBtn;   // ← new
-    QLabel*      m_statusLabel;
-    QLabel*      m_spinner;
-    bool         m_connecting = false;
-
     void setConnecting(bool val);
+
+    QLineEdit*   m_urlInput    = nullptr;
+    QPushButton* m_proceedBtn  = nullptr;
+    QPushButton* m_exitBtn     = nullptr;
+    QLabel*      m_statusLabel = nullptr;
+    bool         m_connecting  = false;
 };

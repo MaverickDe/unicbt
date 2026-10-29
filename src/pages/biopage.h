@@ -15,6 +15,7 @@ signals:
     void startExamRequested(const QString& regNum, const QString& examCode);
     void resumeExamRequested(const QString& regNum, const QString& examCode, const QString& resumeCode);
     void retakeExamRequested(const QString& regNum, const QString& examCode, const QString& retakeCode);
+    void exitRequested();
 
 public slots:
     void setLoading(bool loading, const QString& msg = "");
@@ -32,23 +33,25 @@ private slots:
 
 private:
     QWidget* buildMainForm();
+    // matches the .cpp definition exactly — 3 parameters
     QWidget* buildCodeForm(const QString& actionLabel, const QString& placeholder, bool isResume);
 
-    // Main form
-    QLineEdit*     m_regInput;
-    QLineEdit*     m_examCodeInput;
-    QPushButton*   m_startBtn;
-    QPushButton*   m_resumeBtn;
-    QPushButton*   m_retakeBtn;
-    QLabel*        m_statusLabel;
+    // Main form widgets
+    QLineEdit*   m_regInput      = nullptr;
+    QLineEdit*   m_examCodeInput = nullptr;
+    QPushButton* m_startBtn      = nullptr;
+    QPushButton* m_resumeBtn     = nullptr;
+    QPushButton* m_retakeBtn     = nullptr;
+    QPushButton* m_exitBtn       = nullptr;   // exit before exam starts
+    QLabel*      m_statusLabel   = nullptr;
 
-    // Code input form (reused for resume/retake)
-    QLineEdit*     m_codeInput;
-    QPushButton*   m_confirmCodeBtn;
-    QPushButton*   m_cancelCodeBtn;
-    QLabel*        m_codeFormTitle;
-    QLabel*        m_codeStatusLabel;
+    // Supervisor code form widgets (shared for resume/retake)
+    QLineEdit*   m_codeInput       = nullptr;
+    QPushButton* m_confirmCodeBtn  = nullptr;
+    QPushButton* m_cancelCodeBtn   = nullptr;
+    QLabel*      m_codeFormTitle   = nullptr;
+    QLabel*      m_codeStatusLabel = nullptr;
 
-    QStackedWidget* m_stack;
-    bool m_isResumeMode = true;
+    QStackedWidget* m_stack        = nullptr;
+    bool            m_isResumeMode = true;
 };

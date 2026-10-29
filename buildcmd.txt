@@ -1,4 +1,45 @@
+
+Build commands
+
 rm -rf build
 cmake -B build -DCMAKE_PREFIX_PATH=~/Qt/6.7.3/macos
 cmake --build build
-./build/CBTExam
+
+
+
+Open Application Command
+
+
+
+open ./build/CBTExam.app (for mac)
+
+or
+
+open ./build/CBTExam.app
+
+or 
+
+
+./build/CBTExam.app/Contents/MacOs/CBTExam(m)
+
+
+or 
+
+./build/CBTExam 
+
+
+
+reset accesbility(usefull for mac if accesibility is having issues)
+
+tccutil reset Accessibility com.university.cbtexam   
+
+
+
+
+(Test Data)
+url: http://localhost:8000
+Reg:       CSC/2021/001
+Exam Code: CSC301-2024
+
+
+Retake code: SUP-RETAKE-2024

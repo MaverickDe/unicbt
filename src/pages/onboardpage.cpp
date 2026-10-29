@@ -2,6 +2,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QGraphicsDropShadowEffect>
+#include <QFrame>
 
 OnboardPage::OnboardPage(QWidget* parent) : QWidget(parent) {
     setStyleSheet(R"(
@@ -20,7 +21,7 @@ OnboardPage::OnboardPage(QWidget* parent) : QWidget(parent) {
 
     auto* shadow = new QGraphicsDropShadowEffect(card);
     shadow->setBlurRadius(60);
-    shadow->setColor(QColor(0,0,0,200));
+    shadow->setColor(QColor(0, 0, 0, 200));
     shadow->setOffset(0, 12);
     card->setGraphicsEffect(shadow);
 
@@ -28,11 +29,11 @@ OnboardPage::OnboardPage(QWidget* parent) : QWidget(parent) {
     lay->setContentsMargins(48, 44, 48, 44);
     lay->setSpacing(0);
 
-    // Logo / institution mark
+    // ── Logo area ────────────────────────────────────────────────────────
     auto* logoArea = new QWidget(card);
     auto* logoLay  = new QVBoxLayout(logoArea);
     logoLay->setAlignment(Qt::AlignCenter);
-    logoLay->setContentsMargins(0,0,0,0);
+    logoLay->setContentsMargins(0, 0, 0, 0);
 
     auto* logoIcon = new QLabel("🎓", card);
     logoIcon->setAlignment(Qt::AlignCenter);
@@ -52,15 +53,16 @@ OnboardPage::OnboardPage(QWidget* parent) : QWidget(parent) {
     logoLay->addSpacing(4);
     logoLay->addWidget(appSub);
 
-    // Divider
+    // ── Divider ──────────────────────────────────────────────────────────
     auto* divider = new QFrame(card);
     divider->setFrameShape(QFrame::HLine);
     divider->setObjectName("divider");
 
-    // Form section
+    // ── Form label ───────────────────────────────────────────────────────
     auto* formLabel = new QLabel("Enter Examination Server URL", card);
     formLabel->setObjectName("formLabel");
 
+    // ── URL input row ────────────────────────────────────────────────────
     auto* inputRow = new QHBoxLayout;
     inputRow->setSpacing(10);
 
@@ -74,52 +76,41 @@ OnboardPage::OnboardPage(QWidget* parent) : QWidget(parent) {
     m_proceedBtn->setFixedHeight(48);
     m_proceedBtn->setCursor(Qt::PointingHandCursor);
 
-    m_exitBtn = new QPushButton("Exit", card);
-m_exitBtn->setObjectName("exitBtn");
-m_exitBtn->setFixedHeight(40);
-m_exitBtn->setCursor(Qt::PointingHandCursor);
-
-// add it below or beside the existing layout, e.g.:
-lay->addSpacing(12);
-lay->addWidget(m_exitBtn);
-
-// styling
-card->setStyleSheet(card->styleSheet() + R"(
-    QPushButton#exitBtn {
-        background: transparent;
-        color: #8a8faa;
-        border: 1px solid #2e3050;
-        border-radius: 8px;
-        font-size: 13px;
-    }
-    QPushButton#exitBtn:hover { color: #e74c3c; border-color: #e74c3c; }
-)");
-
-connect(m_exitBtn, &QPushButton::clicked, this, &OnboardPage::onExitClicked);
-
     inputRow->addWidget(m_urlInput, 1);
     inputRow->addWidget(m_proceedBtn);
 
+    // ── Status label ─────────────────────────────────────────────────────
     m_statusLabel = new QLabel("", card);
     m_statusLabel->setObjectName("statusLabel");
     m_statusLabel->setAlignment(Qt::AlignCenter);
     m_statusLabel->setWordWrap(true);
 
-    // Info banner
+    // ── Info banner ──────────────────────────────────────────────────────
     auto* infoBanner = new QWidget(card);
     infoBanner->setObjectName("infoBanner");
     auto* bannerLay = new QHBoxLayout(infoBanner);
     bannerLay->setContentsMargins(14, 10, 14, 10);
-    auto* bannerIcon  = new QLabel("ℹ", infoBanner);
-    auto* bannerText  = new QLabel(
-        "This application will enter fullscreen lockdown mode after connection. "
-        "Ensure you are ready before proceeding.", infoBanner);
+
+    auto* bannerIcon = new QLabel("ℹ", infoBanner);
+    bannerIcon->setStyleSheet("color:#5b6af0; font-size:16px;");
+
+    auto* bannerText = new QLabel(
+        "This application will enter fullscreen lockdown mode when your exam begins. "
+        "Ensure you are ready before proceeding.",
+        infoBanner);
     bannerText->setWordWrap(true);
     bannerText->setObjectName("bannerText");
-    bannerIcon->setStyleSheet("color:#5b6af0; font-size:16px;");
+
     bannerLay->addWidget(bannerIcon, 0, Qt::AlignTop);
     bannerLay->addWidget(bannerText, 1);
 
+    // ── Exit button ──────────────────────────────────────────────────────
+    m_exitBtn = new QPushButton("Exit Application", card);
+    m_exitBtn->setObjectName("exitBtn");
+    m_exitBtn->setFixedHeight(40);
+    m_exitBtn->setCursor(Qt::PointingHandCursor);
+
+    // ── Assemble layout ──────────────────────────────────────────────────
     lay->addWidget(logoArea);
     lay->addSpacing(28);
     lay->addWidget(divider);
@@ -129,11 +120,14 @@ connect(m_exitBtn, &QPushButton::clicked, this, &OnboardPage::onExitClicked);
     lay->addLayout(inputRow);
     lay->addSpacing(10);
     lay->addWidget(m_statusLabel);
-    lay->addSpacing(20);
+    lay->addSpacing(16);
     lay->addWidget(infoBanner);
+    lay->addSpacing(16);
+    lay->addWidget(m_exitBtn);
 
     outerLay->addWidget(card);
 
+    // ── Stylesheet ───────────────────────────────────────────────────────
     card->setStyleSheet(R"(
         QWidget#card {
             background: #1c1e2a;
@@ -144,7 +138,6 @@ connect(m_exitBtn, &QPushButton::clicked, this, &OnboardPage::onExitClicked);
             color: #f0f0f0;
             font-size: 22px;
             font-weight: bold;
-            font-family: 'Segoe UI', sans-serif;
         }
         QLabel#appSub {
             color: #5b6af0;
@@ -178,9 +171,13 @@ connect(m_exitBtn, &QPushButton::clicked, this, &OnboardPage::onExitClicked);
             padding: 0 22px;
             min-width: 110px;
         }
-        QPushButton#proceedBtn:hover { background: #6b7aff; }
+        QPushButton#proceedBtn:hover    { background: #6b7aff; }
         QPushButton#proceedBtn:disabled { background: #2e3050; color: #555; }
-        QLabel#statusLabel { color: #e74c3c; font-size: 13px; min-height: 18px; }
+        QLabel#statusLabel {
+            color: #e74c3c;
+            font-size: 13px;
+            min-height: 18px;
+        }
         QWidget#infoBanner {
             background: #12141e;
             border: 1px solid #2e3050;
@@ -188,11 +185,27 @@ connect(m_exitBtn, &QPushButton::clicked, this, &OnboardPage::onExitClicked);
             border-radius: 8px;
         }
         QLabel#bannerText { color: #8a8faa; font-size: 12px; }
+        QPushButton#exitBtn {
+            background: transparent;
+            color: #8a8faa;
+            border: 1px solid #2e3050;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        QPushButton#exitBtn:hover {
+            color: #e74c3c;
+            border-color: #e74c3c;
+            background: #2a1a1a;
+        }
     )");
 
-    connect(m_proceedBtn, &QPushButton::clicked, this, &OnboardPage::onProceedClicked);
-    connect(m_urlInput, &QLineEdit::returnPressed, this, &OnboardPage::onProceedClicked);
+    // ── Connections ──────────────────────────────────────────────────────
+    connect(m_proceedBtn, &QPushButton::clicked,    this, &OnboardPage::onProceedClicked);
+    connect(m_urlInput,   &QLineEdit::returnPressed, this, &OnboardPage::onProceedClicked);
+    connect(m_exitBtn,    &QPushButton::clicked,    this, &OnboardPage::exitRequested);
 }
+
+// ── Public slots ─────────────────────────────────────────────────────────────
 
 void OnboardPage::reset() {
     m_urlInput->clear();
@@ -200,27 +213,39 @@ void OnboardPage::reset() {
     setConnecting(false);
 }
 
+void OnboardPage::onPingError(const QString& error) {
+    setConnecting(false);
+    m_statusLabel->setStyleSheet("color:#e74c3c; font-size:13px;");
+    m_statusLabel->setText("❌ Cannot reach server: " + error);
+}
+
+// ── Private slots ─────────────────────────────────────────────────────────────
+
 void OnboardPage::onProceedClicked() {
     if (m_connecting) return;
+
     QString url = m_urlInput->text().trimmed();
     if (url.isEmpty()) {
+        m_statusLabel->setStyleSheet("color:#e74c3c; font-size:13px;");
         m_statusLabel->setText("Please enter the server URL.");
         return;
     }
+    // Auto-prepend http:// if missing
     if (!url.startsWith("http://") && !url.startsWith("https://")) {
         url = "http://" + url;
         m_urlInput->setText(url);
     }
+    m_statusLabel->setStyleSheet("color:#8a8faa; font-size:13px;");
     m_statusLabel->setText("Connecting to server...");
-    m_statusLabel->setStyleSheet("color: #8a8faa; font-size:13px;");
     setConnecting(true);
     emit urlConfirmed(url);
 }
-void OnboardPage::onExitClicked() {
-    emit exitRequested();
-}
+
+// ── Private helpers ───────────────────────────────────────────────────────────
+
 void OnboardPage::setConnecting(bool val) {
     m_connecting = val;
     m_proceedBtn->setEnabled(!val);
     m_proceedBtn->setText(val ? "Connecting..." : "Connect →");
+    m_exitBtn->setEnabled(!val);  // also disable exit while connecting
 }
